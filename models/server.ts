@@ -13,7 +13,7 @@ export class Server {
 
         this.app = express();
         this.port= process.env.PORT;
-        this.authPath='/auth';
+        this.authPath="/auth";
 
         //todos estos metodos se ejecutaran una ves llamado a una instancia de Server
         this.DBconnection();

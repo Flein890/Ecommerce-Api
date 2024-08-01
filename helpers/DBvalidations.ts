@@ -10,6 +10,6 @@ export const existsEmail = async(email:string):Promise<void> =>{
     const existEmail: IUser | null = await User.findOne({email});
 
     if(existEmail){
-        throw new Error('This email is registered');
+        throw new Error(`The mail ${email} is registered`);
     }
 }
