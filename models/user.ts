@@ -42,6 +42,7 @@ const UserSchema = new Schema <IUser>({
 
 
 //usando el metodo toJSON de mongoose convertimos los datos a un json desestructurando del this.toObject();
+//Con este método podemos enviar los datos al usuario filtrando lo que elijamos. En este caso, no le enviamos al usuario el __V, password, _id o el codigo.
 
 UserSchema.methods.toJSON = function(){
     const {__V,code,__id,password,...user} = this.toObject();

@@ -12,17 +12,16 @@ import {register} from '../controllers/authentification'
 //Finally, the register function from the ../controllers/authentification module is called if all the validations pass.
 const router = Router();
 
-router.post("register",[
+router.post("/register",[
 
     check('name','Name is required').not().isEmpty(),
     check('email','Email is not valid').isEmail(),
-    check('password', 'pass must be 6 char length').isLength({
-        min:6,
-    }),
+    check('password', 'pass must be 6 char length').isLength({min:6}),
     check('email').custom(existsEmail),
 
     collectErrors,
     
 ],register);
 
-export default Router;
+export default router;
+

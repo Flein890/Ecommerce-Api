@@ -1,6 +1,6 @@
 import express,{ Express } from "express";
 import cors from "cors"
-import authRoutes from "../routes/auth";
+import Router from "../routes/auth";
 import { connectToDatabase } from "../database/config";
 
 //Creamos la clase Server
@@ -37,7 +37,7 @@ export class Server {
      }
 
    routes():void{
-       this.app.use(this.authPath,authRoutes);
+       this.app.use(this.authPath,Router);
    }
 
     listen():void{
