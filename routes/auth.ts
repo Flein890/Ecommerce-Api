@@ -3,6 +3,9 @@ import { check } from "express-validator";
 import { existsEmail } from "../helpers/DBvalidations";
 import collectErrors from "../middlewares/collectErrors";
 import {register} from '../controllers/authentification'
+import { login } from "../controllers/authentification";
+import { verifyUser } from "../controllers/authentification";
+import { getUser } from "../controllers/authentification";
 
 
 //This TypeScript code snippet is defining an Express.js router with a single POST route at /register.
@@ -11,6 +14,9 @@ import {register} from '../controllers/authentification'
 // field is not empty, the [email] field is a valid email, and the password field meets a certain criteria (which is not specified in the code).
 //Finally, the register function from the ../controllers/authentification module is called if all the validations pass.
 const router = Router();
+
+//primero la ruta, despues el middleware, y ultimo el controlador
+
 
 router.post("/register",[
 
@@ -22,6 +28,32 @@ router.post("/register",[
     collectErrors,
     
 ],register);
+
+router.post("/login",[
+    check("email","Mail is required").isEmail(),
+    check("password","Password must be 6 char length").isLength({min:6}),
+
+    collectErrors
+    
+],login)
+
+router.patch("/verify",[
+    check("email","Email required").not().isEmpty().isEmail(),
+    check("code","Verification code required").not().isEmpty(),
+
+    collectErrors
+
+],verifyUser)
+
+
+
+router.get("/user",[
+    collectErrors,
+],getUser)
+
+
+
+
 
 export default router;
 

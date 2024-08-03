@@ -107,3 +107,52 @@ export const login = async(req:Request,res:Response):Promise<void> =>{
       res.status(500).json({msg:"Internal Server Error"})
    }
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------//
+//---------------------------------------------------------VERIFY USER--------------------------------------------------------------//
+//----------------------------------------------------------------------------------------------------------------------------------//
+
+export const verifyUser = async (req:Request,res:Response): Promise<void>=>{
+   const {email,code}=req.body;
+
+   try{
+      const user = await User.findOne({email});
+
+      if(!user){
+         res.status(400).json({msg:"Email not found"});
+         return;
+      }
+      if(user.verified){
+         res.status(400).json({msg:"User already verified"});
+         return;
+      }
+      if(user.code!==code){
+         res.status(401).json({msg:"The code provided is incorrect"});
+         return;
+      }
+
+      const userUpdated = await User.findOneAndUpdate({email},{verified:true});
+      res.status(200).json({msg:"User verified!"})
+
+   }
+   catch(error){
+      console.error(error);
+      res.status(500).json({msg:"Internal server error"})
+   }
+}
+
+
+/////?=====)))))))))))))
+
+export const getUser = async (req:Request,res:Response):Promise<void> =>{
+   const {email} = req.body;
+
+   const getUser = User.findOne({email});
+
+   if(!getUser){
+     res.status(404).json({msg:"User not found"});
+     return;
+   }
+
+   res.status(200).json({getUser})
+}
