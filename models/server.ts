@@ -1,6 +1,7 @@
 import express,{ Express } from "express";
 import cors from "cors"
-import Router from "../routes/auth";
+import AuthRoutes from "../routes/auth";
+import OrdersRoutes from "../routes/orders"
 import { connectToDatabase } from "../database/config";
 
 //Creamos la clase Server
@@ -8,12 +9,14 @@ export class Server {
     app: Express;
     port: string | number | undefined;
     authPath: string ;
+    ordersPath: string;
 
     constructor() {
 
         this.app = express();
         this.port= process.env.PORT;
         this.authPath="/auth";
+        this.ordersPath="/order"
 
         //todos estos metodos se ejecutaran una ves llamado a una instancia de Server
         this.DBconnection();
@@ -37,7 +40,8 @@ export class Server {
      }
 
    routes():void{
-       this.app.use(this.authPath,Router);
+       this.app.use(this.authPath,AuthRoutes);
+       this.app.use(this.ordersPath,OrdersRoutes)
    }
 
     listen():void{

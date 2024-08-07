@@ -70,7 +70,7 @@ export const register = async (req:Request,res:Response):Promise<void> =>{
     await sendEmail(email,codeToSend)
 
    res.status(201).json({msg:"saved",user})
-   console.log('usuario registrado')
+   console.log('user registered correctly')
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------//
@@ -101,6 +101,7 @@ export const login = async(req:Request,res:Response):Promise<void> =>{
       const token = await generateJWT(user.id);
 
       res.json({user,token})
+      console.log("Logged in succesfully")
  
    } catch (error) {
       console.error(error);
@@ -154,5 +155,5 @@ export const getUser = async (req:Request,res:Response):Promise<void> =>{
      return;
    }
 
-   res.status(200).json({getUser})
+   res.status(201).json({getUser})
 }
