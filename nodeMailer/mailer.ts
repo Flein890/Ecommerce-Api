@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 export const sendEmail = async (to:string,code:string):Promise <void> =>{
     try {
         const mailOptions = {
-            from:"Yo",
+            from:"WebApp <francosemailtransporter@gmail.com>",
             to,
             subject:"Verification Code",
             text:`Your code is ${code}`
