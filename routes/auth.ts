@@ -13,6 +13,7 @@ import { getUser } from "../controllers/authentification";
 //The check function from express-validator is used to validate the request body. It checks that the name
 // field is not empty, the [email] field is a valid email, and the password field meets a certain criteria (which is not specified in the code).
 //Finally, the register function from the ../controllers/authentification module is called if all the validations pass.
+//_____
 const router = Router();
 
 //primero la ruta, despues el middleware, y ultimo el controlador
